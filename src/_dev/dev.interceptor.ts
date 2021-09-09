@@ -1,11 +1,12 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
+import { cloneDeep } from 'lodash';
 
 const userInfo = {
   name: 'Pete',
   age: 100,
   licenses: [1230, 3213]
-}
+} as const
 
 const licenses = [
   {
@@ -18,7 +19,7 @@ const licenses = [
     name: 'can_rest',
     description: 'This license confirms that the recipient of it can rest'
   }
-]
+] as const;
 
 export class DevInterceptor implements HttpInterceptor{
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -27,9 +28,9 @@ export class DevInterceptor implements HttpInterceptor{
 
     //stackblitz
     if(req.method === 'GET' && req.url.includes('users')) {
-      return of(new HttpResponse({ status: 200, body: userInfo }));
+      return of(new HttpResponse({ status: 200, body: cloneDeep(userInfo) }));
     } else if(req.method === 'GET' && req.url.includes('licenses')) {
-      return of(new HttpResponse({ status: 200, body: licenses }));
+      return of(new HttpResponse({ status: 200, body: cloneDeep(licenses) }));
     } else {
       throw new Error();
     }

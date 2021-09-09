@@ -28,6 +28,9 @@ if (!environment.production) {
   providers: [
     ...additionalProviders
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    UserInfoComponent
+  ]
 })
 export class AppModule { }

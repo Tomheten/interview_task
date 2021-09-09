@@ -1,5 +1,5 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
 
 const userInfo = {
   name: 'Pete',
@@ -23,15 +23,15 @@ const licenses = [
 export class DevInterceptor implements HttpInterceptor{
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const dupReq = req.clone({ url: '/proxy' + req.url });
+    return next.handle(dupReq);
 
     //stackblitz
-    // if(req.method === 'GET' && req.url.includes('users')) {
-    //   return of(new HttpResponse({ status: 200, body: userInfo }));
-    // }
-    // if(req.method === 'GET' && req.url.includes('licenses')) {
-    //   return of(new HttpResponse({ status: 200, body: licenses }));
-    // }
-
-    return next.handle(dupReq);
+    if(req.method === 'GET' && req.url.includes('users')) {
+      return of(new HttpResponse({ status: 200, body: userInfo }));
+    } else if(req.method === 'GET' && req.url.includes('licenses')) {
+      return of(new HttpResponse({ status: 200, body: licenses }));
+    } else {
+      throw new Error();
+    }
   }
 }

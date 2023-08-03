@@ -1,13 +1,13 @@
-import { NgModule, Provider } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { NgModule, Provider } from '@angular/core'
+import { BrowserModule } from '@angular/platform-browser'
 
-import { AppComponent } from './app.component';
-import { UserInfoComponent } from './user-info/user-info.component';
-import { HttpClientModule } from '@angular/common/http';
-import { environment } from '../environments/environment';
-import { DEV_PROVIDERS } from '../_dev/dev-providers';
-import { MatDialogModule } from '@angular/material/dialog';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppComponent } from './app.component'
+import { UserInfoComponent } from './user-info/user-info.component'
+import { HttpClientModule } from '@angular/common/http'
+import { environment } from '../environments/environment'
+import { DEV_PROVIDERS } from '../_dev/dev-providers'
+import { MatDialogModule } from '@angular/material/dialog'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 const additionalProviders: Provider[] = [];
 if (!environment.production) {
@@ -29,8 +29,5 @@ if (!environment.production) {
     ...additionalProviders
   ],
   bootstrap: [AppComponent],
-  entryComponents: [
-    UserInfoComponent
-  ]
 })
 export class AppModule { }

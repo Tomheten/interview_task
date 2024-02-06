@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^16.1.7",
+    "@ngneat/spectator": "^15.0.1",
     "@angular/cli": "~16.1.7",
     "@angular/compiler-cli": "^16.1.0",
     "@types/jasmine": "~4.3.0",
